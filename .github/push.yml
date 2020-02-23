@@ -1,0 +1,33 @@
+name: test scripts
+
+on: push
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: List checks for ref 0.4.0
+        uses: actions/github-script@0.4.0
+        with:
+          github-token: ${{ github.token }}
+          script: |
+            const result = await github.checks.listForRef({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              ref: context.sha,
+              status: "in_progress"
+            })
+            console.log(result)
+
+      - name: List checks for ref 0.5.0
+        uses: actions/github-script@0.5.0
+        with:
+          github-token: ${{ github.token }}
+          script: |
+            const result = await github.checks.listForRef({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              ref: context.sha,
+              status: "in_progress"
+            })
+            console.log(result)
